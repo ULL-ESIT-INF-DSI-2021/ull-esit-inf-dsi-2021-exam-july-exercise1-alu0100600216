@@ -1,34 +1,30 @@
 import 'mocha';
 import {expect} from 'chai';
-import {add, substract} from '../src/Matrix';
+import {Matrix} from '../src/Matrix';
 
-describe('add function tests', () => {
-  it('add(1, 8) returns value 9', () => {
-    expect(add(1, 8)).to.be.equal(9);
+describe('test clase matrix', () => {
+  
+  it('Se crea un objeto', () => {
+    let matriz1 = new Matrix(2,3,[[2,3,4],[5,6,7]]);
+    expect(matriz1.getN()).to.be.equal(2);
+    expect(matriz1.getN()).to.be.equal(3);
   });
 
-  it('add(-1, 8) returns value 7', () => {
-    expect(add(-1, 8)).to.be.equal(7);
+  it('Imprime', () => {
+    let matriz1 = new Matrix(2,3,[[2,3,4],[5,6,7]]);
+    expect(matriz1.printMatrix()).to.be.equal("2 3 4 5 6 7 ");
+
   });
 
-  it('add(1.2, 3.5) returns value 4.7', () => {
-    expect(add(1.2, 3.5)).to.be.approximately(4.7, 0.000000000001);
-  });
-});
-
-describe('substract function tests', () => {
-  it('substract(7, 1) returns value 6', () => {
-    expect(substract(7, 1)).to.be.equal(6);
+  it('lee desde archivo', () => {
+    let matriz2 = new Matrix();
+    matriz2.readMatrix("matriz2");
+    expect(matriz2.getN).to.be.equal(3);
+    expect(matriz2.getM).to.be.equal(2);
   });
 
-  it('substract(6.7, 3.1) returns value 3.6', () => {
-    expect(substract(6.7, 3.1)).to.be.approximately(3.6, 0.000000000001);
-  });
-
-  it('substract(5, 7) returns value -2', () => {
-    expect(substract(5, 7)).to.be.equal(-2);
-  });
-  it('substract(6.7, 9.8) returns value -3.1', () => {
-    expect(substract(6.7, 9.8)).to.be.approximately(-3.1, 0.000000000001);
+  it('guarda a archivo', () => {
+    let matriz1 = new Matrix(2,3,[[2,3,4],[5,6,7]]);
+    matriz1.writeMatrix("matriz1");
   });
 });

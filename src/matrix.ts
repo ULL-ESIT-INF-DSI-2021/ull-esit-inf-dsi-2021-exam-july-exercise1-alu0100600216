@@ -18,7 +18,7 @@ export class Matrix {
     private m_: Number;
     private elements_: number[][];
 
-    constructor(n: number, m: Number, elements: number[][]) {
+    constructor(n: number = 1, m: Number = 1, elements: number[][] = [[]]) {
 
         this.n_ = n;
         this.m_ = m;
@@ -48,21 +48,22 @@ export class Matrix {
    * La función @returns un objeto Matrix con la matriz leída
    * o un mensaje de error si no existe la matriz.
    */
-    readMatrix(name: string): Matrix{
+    readMatrix(name: string) {
         
         let path: string = './matriz';
             
         if (fs.existsSync(path + "/" + name + '.json')) {
             let readMatrixJSON = fs.readFileSync(path + "/" + name + '.json', "utf-8");
             let readMatrix = JSON.parse(readMatrixJSON);
+            this.n_ = readMatrix["n"];
+            this.m_ = readMatrix["m"];
+            this.elements_ = readMatrix["elements"];
 
-            let aux = new Matrix(readMatrix[0], readMatrix[1], readMatrix[2])
             
             console.log("Matriz leída con éxito");
-            return aux;
         }
             else {
-            throw Error ("ERROR - No existe una matriz con ese nombre");
+                console.log("ERROR - Ya existe una matriz con ese nombre");
         }
     }
 
